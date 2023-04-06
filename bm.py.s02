@@ -1,0 +1,12 @@
+import matplotlib
+from matplotlib import pyplot as plt
+import nibabel as nib
+import pdb
+
+path1 = '/localdata/naixinw/datasets/synapse/averaged-training-images/'
+file1 = 'DET0015601_avg.nii.gz'
+img = nib.load(path1+file1)
+plt.imshow(img.dataobj[:,:,0])
+plt.show()
+
+pdb.set_trace()

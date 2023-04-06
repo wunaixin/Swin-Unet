@@ -1,0 +1,12 @@
+import torch
+from collections import OrderedDict
+import pdb
+
+snapshot = 'pretrained_ckpt/swin_tiny_patch4_window7_224.pth'
+dict1 = torch.load(snapshot)['model']
+
+dict2 = OrderedDict()
+for k in dict1:
+    dict2['swin_unet.' + k] = dict1[k]
+    
+pdb.set_trace()

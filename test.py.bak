@@ -14,7 +14,6 @@ from utils import test_single_volume
 from networks.vision_transformer import SwinUnet as ViT_seg
 from trainer import trainer_synapse
 from config import get_config
-import pdb   #bm
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--volume_path', type=str,
@@ -116,17 +115,11 @@ if __name__ == "__main__":
     args.z_spacing = dataset_config[dataset_name]['z_spacing']
     args.is_pretrain = True
 
-    # net = ViT_seg(config, img_size=args.img_size, num_classes=args.num_classes).cuda()
-    net = ViT_seg(config, img_size=args.img_size, num_classes=args.num_classes)   #bm
+    net = ViT_seg(config, img_size=args.img_size, num_classes=args.num_classes).cuda()
 
-    # snapshot = os.path.join(args.output_dir, 'best_model.pth')
-    # snapshot = 'pretrained_ckpt/swin_tiny_patch4_window7_224.pth'    #bm
-    snapshot = 'pretrained_ckpt/dict2.pth'    #bm
+    snapshot = os.path.join(args.output_dir, 'best_model.pth')
     if not os.path.exists(snapshot): snapshot = snapshot.replace('best_model', 'epoch_'+str(args.max_epochs-1))
-    pdb.set_trace()
-    # msg = net.load_state_dict(torch.load(snapshot))
-    # msg = net.load_state_dict(torch.load(snapshot)['model'])   #bm
-    msg = net.load_state_dict(torch.load(snapshot))   #bm
+    msg = net.load_state_dict(torch.load(snapshot))
     print("self trained swin unet",msg)
     snapshot_name = snapshot.split('/')[-1]
 
